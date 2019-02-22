@@ -1,6 +1,36 @@
+let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+let searchTerms = '';
+let apiKey = '&maxResults=20&key=AIzaSyBqfUHvXPiHKcQc9KeWA7tVqT05-rHMWHM';
+let data = {};
+let request = new XMLHttpRequest();
+
+let searchBox = document.querySelector('#search_box');
+
+function grabSearchText(){
+    searchTerms = searchBox.value.split(' ').join('%20');
+    let bookArr = document.querySelectorAll('.book');
+    bookArr.forEach(book => resultShelf.removeChild(book));
+}
+
+searchBox.addEventListener('keyup', function(event) {
+    if(event.key == 'Enter'){
+        grabSearchText();
+        console.log(searchTerms);
+        makeRequest();
+    };
+})
+
+let submitSearch = document.querySelector('#submit');
+submitSearch.addEventListener('click', function () {
+    grabSearchText();
+    console.log(searchTerms);
+    makeRequest();
+})
+
+
 let resultShelf = document.querySelector('#result_shelf');
 
-function createBook(book){
+function createBook(book) {
     let imgLink = book.volumeInfo.imageLinks.thumbnail;
     let authorName = book.volumeInfo.authors;
     let bookName = book.volumeInfo.title;
@@ -37,7 +67,7 @@ function createBook(book){
     author.innerText = 'By: ' + authorName;
 
     bookDiv.appendChild(author);
-    
+
     let publisher = document.createElement('p');
     publisher.classList.add('publisher');
     publisher.innerText = publisherName;
@@ -46,23 +76,16 @@ function createBook(book){
     resultShelf.appendChild(bookDiv);
 }
 
-let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-let searchTerms = 'harry_potter';
-let apiKey = '&key=AIzaSyBqfUHvXPiHKcQc9KeWA7tVqT05-rHMWHM';
-let data = {};
-
-
-let request = new XMLHttpRequest();
-
-request.open('GET', url + searchTerms + apiKey, true);
-request.onload = function() {
-    console.log('i am in');
-    data = JSON.parse(this.response);
-    if(request.status >= 200 && request.status < 400){
-        data.items.forEach(bookInfo => createBook(bookInfo));
-    } else {
-        console.log('error');
-    }
-};
-
-request.send();
+function makeRequest() {
+    request.open('GET', url + searchTerms + apiKey, true);
+    request.onload = function () {
+        console.log('i am in');
+        data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            data.items.forEach(bookInfo => createBook(bookInfo));
+        } else {
+            console.log('error');
+        }
+    };
+    request.send();
+}
