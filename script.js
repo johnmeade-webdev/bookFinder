@@ -3,8 +3,9 @@ let searchTerms = '';
 let apiKey = '&maxResults=20&key=AIzaSyBqfUHvXPiHKcQc9KeWA7tVqT05-rHMWHM';
 let data = {};
 let request = new XMLHttpRequest();
-
 let searchBox = document.querySelector('#search_box');
+let myShelf = '';
+let myShelfArr = [];
 
 function grabSearchText(){
     searchTerms = searchBox.value.split(' ').join('%20');
@@ -53,6 +54,9 @@ function createBook(book) {
     let fav = document.createElement('p');
     fav.classList.add('fav');
     fav.innerText = 'ADD TO SHELF';
+    fav.addEventListener('click', function(){
+        localStorage.setItem()
+    })
 
     bookDiv.appendChild(fav);
 
@@ -89,3 +93,27 @@ function makeRequest() {
     };
     request.send();
 }
+
+function fetchShelf(){
+    if(localStorage.getItem('myShelf') != null){
+        myShelf = localStorage.getItem('myShelf');
+    }else{
+      	localStorage.setItem('myShelf', '');
+        myShelf = '';
+    };
+}
+
+function addToShelf(title, author, publisher, img, url){
+    fetchShelf();
+    myShelf += `${title}; ${author}; ${publisher}; ${img}; ${url} / `;
+  	localStorage.setItem('myShelf', myShelf);
+}
+
+function populateShelf(){
+    fetchShelf();
+    let bookArr = myShelf.split(' / ');
+    bookArr.forEach(book => myShelfArr.push(book.split('; ')))
+}
+
+
+
