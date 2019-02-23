@@ -1,8 +1,9 @@
 .book {
+    position: relative;
     background-color: rgb(248, 242, 242);
     margin: 1.5rem;
-    width: 250px;
-    height: 300px;
+    width: 275px;
+    height: 350px;
     padding-top: .5rem;
     overflow: hidden;
     border-radius: 1px;
@@ -24,17 +25,34 @@ img {
     padding: .25rem 0;
     font-size: .75rem;
     letter-spacing: .2rem;
+    transition: 500ms;
 }
 
-.title, .author, .publisher {
-    text-align: left;
+.fav:hover {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .25rem .25rem;
+}
+
+
+.author {
+    text-align: center;
     font-size: .75rem;
-    padding-left: .25rem;
-    padding-bottom: .25rem;
+    padding: .25rem .25rem;
 }
 
 .publisher {
     font-style: italic;
-    text-align: center;
     font-size: .5rem;
+    position: absolute;
+    bottom: 0;
+    padding: .25rem .5rem;
 }

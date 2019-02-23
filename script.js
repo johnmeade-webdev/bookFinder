@@ -62,13 +62,13 @@ function createBook(book) {
 
     let title = document.createElement('p');
     title.classList.add('title');
-    title.innerText = 'Title: ' + bookName;
+    title.innerText = bookName;
 
     bookDiv.appendChild(title);
 
     let author = document.createElement('p');
     author.classList.add('author');
-    author.innerText = 'By: ' + authorName;
+    author.innerText = authorName;
 
     bookDiv.appendChild(author);
 
