@@ -94,7 +94,14 @@ submitSearch.addEventListener('click', function () {
 })
 
 shelfElement.addEventListener('click', function(){
-    populateShelf();
+    if(shelfElement.innerText == 'my shelf'){
+        shelfElement.innerText = 'my search';
+        populateShelf();
+    }else{
+        shelfElement.innerText = 'my shelf';
+        grabSearchText();
+        makeRequest();
+    };
 })
 
 // grabSearchText()
