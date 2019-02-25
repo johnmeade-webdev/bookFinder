@@ -133,6 +133,7 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf) {
 
     let info = document.createElement('a');
     info.setAttribute('href', infoLink);
+    info.setAttribute('target', '_blank');
 
     let img = document.createElement('img');
     img.setAttribute('src', imgLink);
