@@ -147,6 +147,7 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf) {
         fav.innerText = 'ADD TO SHELF';
         fav.addEventListener('click', function(){
             addToShelf(title, author, publisher, imgLink, infoLink);
+            fav.innerText = 'ADDED'
         });
     }else{
         fav.innerText = 'TAKE OFF SHELF';
@@ -205,7 +206,7 @@ function fetchShelf(){
 function addToShelf(title, author, publisher, img, url){
     fetchShelf();
     myShelf += `${title}; ${author}; ${publisher}; ${img}; ${url} / `;
-  	localStorage.setItem('myShelf', myShelf);
+    localStorage.setItem('myShelf', myShelf);  
 }
 
 // removeFromShelf()
