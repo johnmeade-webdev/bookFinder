@@ -94,3 +94,52 @@ nav {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+@media only screen and (max-width: 600px){
+    body {
+        min-width: 300px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    nav {
+        width: calc(100% - 25px);
+        height: 2.25rem;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        display: flex;
+    }
+
+    #shelf {
+        cursor: pointer;
+        padding: 0 .25rem;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        transition: 500ms;
+    }
+
+    #search_card {
+        width: calc(100% - 25px);
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #search_box {
+        width: 80%;
+        margin: auto;
+        margin-bottom: .25rem;
+    }
+
+    #submit {
+        width: 20%;
+        margin: auto;
+        border-bottom-right-radius: 10px;
+    }
+}
