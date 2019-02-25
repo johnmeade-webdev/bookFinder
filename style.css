@@ -14,23 +14,38 @@ p {
 
 body {
     font-family: 'Open Sans', sans-serif;
+    background-color: rgb(240, 243, 245);
 }
 
 nav {
     width: calc(100% - 150px);
     height: 2.25rem;
     margin: 2rem auto;
+    padding: 0 2rem;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
 }
 
+#shelf {
+    cursor: pointer;
+    padding: 0 2rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    transition: 500ms;
+}
+
+#shelf:hover {
+    background-color: rgb(172, 158, 158);
+    color: white;
+}
 
 #search_card {
     background-image: url('./public/stacked_books_1600x400.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    opacity: .7;
     width: calc(100% - 100px);
     height: 200px;
     margin: 1rem auto;
@@ -46,7 +61,10 @@ nav {
     border-style: none;
     margin-left: 2rem;
     background-color: rgba(248, 250, 252, 0.9);
-
+    box-shadow: 2px 2px 5px rgb(180, 176, 176),
+                -2px -2px 5px rgb(180, 176, 176),
+                2px 0px 5px rgb(180, 176, 176),
+                -2px 0px 5px rgb(180, 176, 176);
 }
 
 #search_box {
@@ -54,16 +72,20 @@ nav {
     height: 3rem;
     margin-bottom: .5rem;
     text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 #submit {
     height: 2.5rem;
+    border-bottom-left-radius: 10px;
+    /* border-bottom-right-radius: 10px; */
 }
 
 /* ================================== */
 
 #result_shelf {
-    background-color: rgba(235, 230, 224, 0.61);
+    /* background-color: rgba(235, 230, 224, 0.61); */
     width: calc(100% - 100px);
     margin: 2rem auto;
     padding: 2rem 2rem;

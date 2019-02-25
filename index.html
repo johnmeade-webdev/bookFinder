@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen"
         href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <link href="https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911|Open+Sans|Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911|Open+Sans|BenchNine" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="card.css">
 </head>
@@ -17,13 +17,13 @@
 
     <nav>
         <h1>BookFinder |</h1>
-        <h2>my shelf</h2>
+        <h2 id='shelf'>my shelf</h2>
     </nav>
 
 
     <section id='search_card'>
-        <input type="text" id="search_box" placeholder="title |or| author">
-        <input type="submit" id="submit" value="discover">
+        <input type="text" id="search_box" placeholder="title |or| subject">
+        <input type="submit" id="submit" value="find">
     </section>
 
     <section id='result_shelf'>
@@ -34,10 +34,11 @@
             <p class='title'>title</p>
             <p class='author'>author</p>
             <p class='publisher'>publisher</p>
+            <p>No Results Yet</p>
         </div> -->
     </section>
 
-    <script src="script.js"></script>
+    <script src="script-re-write.js"></script>
 </body>
 
 </html>
