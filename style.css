@@ -170,5 +170,9 @@ footer img {
         margin: auto;
         border-bottom-right-radius: 10px;
     }
+
+    #result_shelf {
+        margin: .5rem auto;
+    }
 }
 

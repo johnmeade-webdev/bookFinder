@@ -65,6 +65,8 @@ img {
 @media only screen and (max-width: 600px){
     .book {
         min-width: 250px;
+        height: 300px;
+        margin: 0;
     }
 
     img {
