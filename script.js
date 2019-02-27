@@ -26,11 +26,14 @@ function makeRequest() {
         console.log('i am in');
         data = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400){
+            fetchShelf(); 
             data.items.forEach(function(book){
                 let imgLink = '';
                 let title = '';
                 let author = '';
                 let publisher = '';
+                let onShelf = false;
+                myShelf.indexOf(`${title}; ${author}; ${publisher}; ${img}; ${url} / `) != -1 ? onShelf = true : null;
                 if(book.volumeInfo.imageLinks == undefined){
                     imgLink = './public/empty_book_cover.png';
                 }else{
@@ -56,7 +59,7 @@ function makeRequest() {
                 }
 
                 let infoLink = book.volumeInfo.infoLink;
-                createBook(title, author, publisher, imgLink, infoLink, false);
+                createBook(title, author, publisher, imgLink, infoLink, false, onShelf);
             });
         } else {
             console.log('error');
@@ -76,7 +79,7 @@ function makeRequest() {
 //       click on the botton.
 //       The listener triggers `grabSearchText()` and then 
 //       the `makeRequest()` function.
-//    3) 
+//    3) Listener for the `my shelf` display.
 //    4) See the createBook() function for additional listeners
 
 searchBox.addEventListener('keyup', function(event) {
@@ -126,7 +129,7 @@ function grabSearchText(){
 //    and populates the data in the form of an element of class
 //    `.book`. Each created book is then added to the DOM for viewing.
 
-function createBook(title, author, publisher, imgLink, infoLink, shelf) {
+function createBook(title, author, publisher, imgLink, infoLink, shelf, onShelf) {
     
     let bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
@@ -147,15 +150,21 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf) {
         fav.innerText = 'ADD TO SHELF';
         fav.addEventListener('click', function(){
             addToShelf(title, author, publisher, imgLink, infoLink);
-            fav.innerText = 'ADDED'
+            fav.innerText = 'ADDED';
         });
     }else{
-        fav.innerText = 'TAKE OFF SHELF';
+        fav.innerText = 'REMOVE FROM SHELF';
         fav.addEventListener('click', function(){
             removeFromShelf(title, author, publisher, imgLink, infoLink);
         });
     }
+
+    if(onShelf){
+        fav.innerText = 'ON SHELF';
+    }
     
+
+
     let titleElement = document.createElement('p');
     titleElement.classList.add('title');
     titleElement.innerText = title;
