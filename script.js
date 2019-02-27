@@ -33,7 +33,7 @@ function makeRequest() {
                 let author = '';
                 let publisher = '';
                 let onShelf = false;
-                myShelf.indexOf(`${title}; ${author}; ${publisher}; ${img}; ${url} / `) != -1 ? onShelf = true : null;
+                
                 if(book.volumeInfo.imageLinks == undefined){
                     imgLink = './public/empty_book_cover.png';
                 }else{
@@ -43,13 +43,16 @@ function makeRequest() {
                 if(book.volumeInfo.title == undefined){
                     title = 'Title Not Available';
                 }else{
-                    title = book.volumeInfo.title;
+                    (book.volumeInfo.title).length > 80 ? 
+                        title = (book.volumeInfo.title).slice(0, 79) + '...' : title = book.volumeInfo.title;
                 };
 
                 if(book.volumeInfo.authors == undefined){
                     author = 'Author Not Available';
                 }else{
-                    author = book.volumeInfo.authors;
+                    let authorList = (book.volumeInfo.authors).join(', ');
+                    authorList.length > 50 ? 
+                        author = authorList.slice(0, 49) + '...' : author = authorList;
                 }
 
                 if(book.volumeInfo.publisher == undefined){
@@ -59,10 +62,11 @@ function makeRequest() {
                 }
 
                 let infoLink = book.volumeInfo.infoLink;
+                myShelf.indexOf(`${title}; ${author}; ${publisher}; ${imgLink}; ${infoLink} / `) != -1 ? onShelf = true : null;
                 createBook(title, author, publisher, imgLink, infoLink, false, onShelf);
             });
         } else {
-            console.log('error');
+            document.querySelector('#notification').innerText = '... no results found, please try again ...';
         }
     };
     request.send();
@@ -84,15 +88,15 @@ function makeRequest() {
 
 searchBox.addEventListener('keyup', function(event) {
     if(event.key == 'Enter'){
+        shelfElement.innerText == 'my search' ? shelfElement.innerText = 'my shelf' : null;
         grabSearchText();
-        // console.log(searchTerms);
         makeRequest();
     };
 })
 
 submitSearch.addEventListener('click', function () {
+    shelfElement.innerText == 'my search' ? shelfElement.innerText = 'my shelf' : null;
     grabSearchText();
-    // console.log(searchTerms);
     makeRequest();
 })
 
@@ -130,7 +134,8 @@ function grabSearchText(){
 //    `.book`. Each created book is then added to the DOM for viewing.
 
 function createBook(title, author, publisher, imgLink, infoLink, shelf, onShelf) {
-    
+    document.querySelector('#notification').innerText = '';
+
     let bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
 
@@ -146,7 +151,10 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf, onShelf)
     // save the book info in localStorage
     let fav = document.createElement('p');
     fav.classList.add('fav');
-    if(shelf == false){
+
+    if(onShelf){
+        fav.innerText = 'ON SHELF';
+    }else if(shelf == false){
         fav.innerText = 'ADD TO SHELF';
         fav.addEventListener('click', function(){
             addToShelf(title, author, publisher, imgLink, infoLink);
@@ -158,13 +166,7 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf, onShelf)
             removeFromShelf(title, author, publisher, imgLink, infoLink);
         });
     }
-
-    if(onShelf){
-        fav.innerText = 'ON SHELF';
-    }
     
-
-
     let titleElement = document.createElement('p');
     titleElement.classList.add('title');
     titleElement.innerText = title;
@@ -242,6 +244,8 @@ function populateShelf(){
     bookElementsArr.forEach(book => resultShelf.removeChild(book));
 
     fetchShelf();
+    myShelf.length == 0 ? 
+        document.querySelector('#notification').innerText = `... your shelf is currently empty ...` : null;
     let myShelfArr = [];
     let bookArr = myShelf.split(' / ');
     bookArr.forEach(book => myShelfArr.push(book.split('; ')));

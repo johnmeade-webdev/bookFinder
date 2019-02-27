@@ -103,6 +103,12 @@ nav {
     justify-content: center;
 }
 
+#notification {
+    font-family: 'BenchNine', 'Mono Space';
+    font-size: 2rem;
+    opacity: .3;
+}
+
 /* ============= */
 /* Footer Styles */
 

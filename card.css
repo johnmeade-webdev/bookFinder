@@ -7,10 +7,18 @@
     padding-top: .5rem;
     overflow: hidden;
     border-radius: 5px;
-    box-shadow: 2px 2px 15px rgb(180, 176, 176),
-                -2px -2px 15px rgb(180, 176, 176),
-                2px 0px 15px rgb(180, 176, 176),
-                -2px 0px 15px rgb(180, 176, 176);
+    box-shadow: 2px 2px 5px rgb(180, 176, 176),
+                -2px -2px 5px rgb(180, 176, 176),
+                2px 0px 5px rgb(180, 176, 176),
+                -2px 0px 5px rgb(180, 176, 176);
+    transition: 500ms;
+}
+
+.book:hover {
+    box-shadow: 2px 2px 15px rgb(100, 98, 98),
+                -2px -2px 15px rgb(100, 98, 98),
+                2px 0px 15px rgb(100, 98, 98),
+                -2px 0px 15px rgb(100, 98, 98);
 }
 
 img {
@@ -33,7 +41,7 @@ img {
     transition: 500ms;
 }
 
-.fav:hover {
+.fav:hover, .onShelf {
     background-color: rgba(112, 17, 17, 0.281);
     color: black;
     font-weight: bold;
@@ -51,7 +59,6 @@ img {
     text-align: center;
     font-size: .75rem;
     padding: .25rem .5rem;
-    /* border: 2px solid black; */
 }
 
 .publisher {
