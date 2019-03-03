@@ -23,6 +23,7 @@
 
 img {
     height: 200px;
+    max-width: 265px;
     box-shadow: 2px 2px 5px rgb(180, 176, 176),
                 -2px -2px 5px rgb(180, 176, 176),
                 2px 0px 5px rgb(180, 176, 176),
@@ -78,6 +79,7 @@ img {
 
     img {
         height: 150px;
+        max-width: 240px;
     }
 
     .title {

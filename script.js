@@ -23,10 +23,12 @@ let shelfElement = document.querySelector('#shelf');
 function makeRequest() {
     request.open('GET', url + searchTerms + apiKey, true);
     request.onload = function () {
-        console.log('i am in');
         data = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400){
             fetchShelf(); 
+            data.totalItems < 1 ? 
+                document.querySelector('#notification').innerText = '... no results found, please try again ...' :
+                null;
             data.items.forEach(function(book){
                 let imgLink = '';
                 let title = '';
@@ -202,7 +204,6 @@ function createBook(title, author, publisher, imgLink, infoLink, shelf, onShelf)
 function fetchShelf(){
     if(localStorage.getItem('myShelf') != null){
         myShelf = localStorage.getItem('myShelf');
-        console.log('shelf is fetched');
     }else{
       	localStorage.setItem('myShelf', '');
         myShelf = '';
@@ -244,10 +245,13 @@ function populateShelf(){
     bookElementsArr.forEach(book => resultShelf.removeChild(book));
 
     fetchShelf();
+
     myShelf.length == 0 ? 
         document.querySelector('#notification').innerText = `... your shelf is currently empty ...` : null;
+    
     let myShelfArr = [];
     let bookArr = myShelf.split(' / ');
+    
     bookArr.forEach(book => myShelfArr.push(book.split('; ')));
     myShelfArr.pop();
     myShelfArr.forEach(function(shelfItem){
